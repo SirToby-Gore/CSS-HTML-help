@@ -1,0 +1,34 @@
+.card {
+    height: 250px;
+    width: 400px;
+    margin: 30px;
+    border-radius: 30px;
+    padding: 5px;
+    justify-content: center;
+    position: relative;
+    background-color: rgb(19, 13, 54);
+}
+
+.animated-border{
+    background: linear-gradient(
+        to right,
+        red,
+        green,
+        blue,
+        green,
+        red
+    );
+
+    content: "";
+    border-radius: inherit;
+    animation: animated 10s linear infinite;
+    position: absolute;
+    inset: -.5rem;
+    z-index: -1;
+}
+
+@keyframes animated {
+    to {
+        background-position-x: 420px; /* the width + margin and padding */
+    }
+}
