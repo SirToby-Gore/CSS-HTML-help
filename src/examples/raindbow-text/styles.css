@@ -1,4 +1,4 @@
-#artext {
+h1#ARtext {
     background: linear-gradient( to left, violet, indigo, blue, green, yellow, orange, red);
     background-clip: text;
     color: transparent;
@@ -7,6 +7,6 @@
 }
 @keyframes animated {
     to {
-        background-position-x: 161px; /* width of the image, or put 100vw for whole page stuff. */
+        background-position-x: 161px; /* width of the image/text, or put 100vw for whole page stuff. */
     }
-}
+}   
