@@ -1,75 +1,61 @@
-
-let nightSkies = document.getElementsByClassName("night-sky");
-
-/**
- * ## `random_int`
- * This is part of the random.js part of JS-mods made by Toby Gore
- * 
- * Returns a random integer between `min` and `max`, inclusive
- * ### Args
- * * `min`
- *      - **int**
- *      - The minimum value
- * * `max`
- *      - **int**
- *      - The maximum value
- */
-function random_int(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-/**
- * ## `random_float`
- * This is part of the random.js part of JS-mods made by Toby Gore
- * 
- * Returns a random float between `min` and `max`, inclusive
- * ### Args
- * * `min`
- *      - **float**
- *      - The minimum value
- * * `max`
- *      - **float**
- *      - The maximum value
- */
-function random_float(min, max) {
-    return Math.random() * (max - min) + min;
+class RandomCoordinates {
+    constructor() {
+        this.x = Math.random() * 100 + '%';
+        this.y = Math.random() * 100 + '%';
+    }
 }
 
 
-function makeAStar(speed = 1) {
-    let newStar = document.createElement("div");
-    
-    newStar.classList.add("shooting-star");
+class ShootingStar {
+    constructor() {
+        this.star = document.createElement('div');
+        this.star.classList.add('star');
 
-    newStar.style.setProperty("--x", random_int(0, 70) + "%");
-    newStar.style.setProperty("--y", random_int(0, 70) + "%");
+        this.start = new RandomCoordinates();
 
-    const moveAmount = random_int(7, 50) * speed;
-    newStar.style.setProperty("--travel-distance-x", moveAmount + "vh")
-    newStar.style.setProperty("--travel-distance-y", moveAmount + "vh")
-    
-    newStar.style.setProperty("--delay", random_float(0, 3) + "s");
+        this.setStyles();
+    }
 
-    return newStar;
+    setStyles() {
+        this.setNewStyleVar('--start-x', this.start.x);
+        this.setNewStyleVar('--start-y', this.start.y);
+
+        this.setNewStyleVar('--duration', Math.random() * 6 + 5 + 's'); 
+
+        this.setNewStyleVar('--delay', Math.random() + 's');
+
+        this.setNewStyleVar('--top', Math.random() * 100 - 30 + '%');
+        this.setNewStyleVar('--left', Math.random() * 100 - 30+ '%');
+
+        this.setNewStyleVar('--size', Math.random() + 0.5);
+
+        this.setNewStyleVar('--angle', Math.random() * 360 + 'deg');
+    }
+
+    setNewStyleVar(styleName, styleValue) {
+        this.star.style.setProperty(styleName, styleValue);
+    }
+
+    getStar() {
+        return this.star;
+    }
 }
 
+new ShootingStar();
 
-for (i in nightSkies) {
+class NightSky {
+    constructor() {
+        this.nightSky = document.getElementById('night-sky');
 
-    if (i === "item") break
+        this.numberOfStars = Number.parseInt(this.nightSky.style.getPropertyValue('--number-of-stars'));
+        this.addStars(this.numberOfStars);
+    }
 
-    let nightSky = nightSkies[i];
-
-    let numberOfStars =  Number.parseInt(nightSky.style.getPropertyValue("--number-of-stars"));
-
-    for (let i = 0; i < numberOfStars; i++) {
-        nightSky.appendChild(
-            makeAStar(
-                random_float(0.8, 3)
-            )
-        );
-    }   
+    addStars(numberOfStars) {
+        for (let i = 0; i < numberOfStars; i++) {
+            this.nightSky.appendChild(new ShootingStar().getStar());
+        }
+    }
 }
 
+new NightSky();
