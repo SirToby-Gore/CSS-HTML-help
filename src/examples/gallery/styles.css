@@ -7,13 +7,15 @@ body {
   width: 70%;
   height: 450px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 10px;
 }
 
 .gallery img {
-  width: 10%;
   height: 100%;
+  width: 10%;
+  flex-basis: 1;
   object-fit: cover;
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.684);
@@ -31,6 +33,7 @@ body {
   filter: grayscale(100%) blur();
 }
 .gallery img:hover {
+  flex-basis: 4;
   width: 25%;
   border: 4px solid #8d0f0b ;
 }
